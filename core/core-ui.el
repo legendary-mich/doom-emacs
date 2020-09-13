@@ -630,7 +630,7 @@ This offers a moderate boost in startup (or theme switch) time, so long as
   (run-hook-wrapped 'doom-init-ui-hook #'doom-try-run-hook)
 
   (add-hook 'kill-buffer-query-functions #'doom-protect-fallback-buffer-h)
-  (add-hook 'after-change-major-mode-hook #'doom-highlight-non-default-indentation-h 'append)
+  ;; (add-hook 'after-change-major-mode-hook #'doom-highlight-non-default-indentation-h 'append)
 
   ;; Initialize custom switch-{buffer,window,frame} hooks:
   ;;
