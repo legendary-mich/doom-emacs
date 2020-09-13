@@ -203,7 +203,8 @@ to tide."
   ;; support in the current buffer, so we must re-enable it later once eldoc
   ;; support exists. It is set *after* tide-mode is enabled, so enabling it on
   ;; `tide-mode-hook' is too early, so...
-  (advice-add #'tide-setup :after #'eldoc-mode)
+  (when global-eldoc-mode
+    (advice-add #'tide-setup :after #'eldoc-mode))
 
   (map! :localleader
         :map tide-mode-map
