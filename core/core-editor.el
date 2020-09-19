@@ -151,7 +151,7 @@ possible."
 
 ;; Default to soft line-wrapping in text modes. It is more sensibile for text
 ;; modes, even if hard wrapping is more performant.
-(add-hook 'text-mode-hook #'visual-line-mode)
+;; (add-hook 'text-mode-hook #'visual-line-mode)
 
 
 ;;
