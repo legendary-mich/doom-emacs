@@ -222,9 +222,9 @@ list remains lean."
   "Queue async compilation for all non-doom Elisp files."
   (when (fboundp 'native-compile-async)
     (cl-loop with paths = (cl-loop for path in load-path
-                                   if (not (string-prefix-p doom-local-dir path))
+                                   unless (string-prefix-p doom-local-dir path)
                                    collect path)
-             for file in (doom-files-in paths :match "\\.el\\(\\.gz\\)?$")
+             for file in (doom-files-in paths :match "\\.el\\(?:\\.gz\\)?$")
              if (and (file-exists-p (byte-compile-dest-file file))
                      (not (doom--find-eln-file (doom--eln-file-name file)))) do
              (doom-log "Compiling %s" file)
@@ -250,7 +250,7 @@ declaration) or dependency thereof that hasn't already been."
                     (let ((straight-use-package-pre-build-functions
                            (cons (lambda (pkg &rest _)
                                    (when-let (commit (cdr (assoc pkg pinned)))
-                                     (print! (info "Checked out %s") commit)))
+                                     (print! (info "Checked out %s: %s") pkg commit)))
                                  straight-use-package-pre-build-functions)))
                       (straight-use-package (intern package))
                       ;; HACK Line encoding issues can plague repos with dirty

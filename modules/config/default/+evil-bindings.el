@@ -222,7 +222,8 @@
         :n "gQ" #'+format:region)
 
       (:when (featurep! :editor rotate-text)
-        :n "!"  #'rotate-text)
+       :n "]r"  #'rotate-text
+       :n "[r"  #'rotate-text-backward)
 
       (:when (featurep! :editor multiple-cursors)
         ;; evil-multiedit
@@ -316,6 +317,8 @@
         :desc "Switch buffer"           "B" #'switch-to-buffer)
        (:unless (featurep! :ui workspaces)
         :desc "Switch buffer"           "b" #'switch-to-buffer)
+       :desc "Clone buffer"                "c"   #'clone-indirect-buffer
+       :desc "Clone buffer other window"   "C"   #'clone-indirect-buffer-other-window
        :desc "Kill buffer"                 "d"   #'kill-current-buffer
        :desc "ibuffer"                     "i"   #'ibuffer
        :desc "Kill buffer"                 "k"   #'kill-current-buffer
@@ -453,6 +456,7 @@
 
       ;;; <leader> i --- insert
       (:prefix-map ("i" . "insert")
+       :desc "Emoji"                         "e"   #'emojify-insert-emoji
        :desc "Current file name"             "f"   #'+default/insert-file-path
        :desc "Current file path"             "F"   (cmd!! #'+default/insert-file-path t)
        :desc "Evil ex path"                  "p"   (cmd! (evil-ex "R!echo "))
